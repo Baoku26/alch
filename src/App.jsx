@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Sparkles,
   Flame,
@@ -13,11 +13,12 @@ import {
   Twitter,
   Copy,
   ExternalLink,
+  RefreshCw,
+  Coins,
 } from "lucide-react";
 import "./App.css";
 
 const AlchemyLandingPage = () => {
-  const { scrollYProgress } = useScroll();
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -36,7 +37,7 @@ const AlchemyLandingPage = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // navbar height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -44,20 +45,8 @@ const AlchemyLandingPage = () => {
         top: offsetPosition,
         behavior: "smooth",
       });
-      setMobileMenuOpen(false); // Close mobile menu after navigation
+      setMobileMenuOpen(false);
     }
-  };
-
-  // Floating animation variants
-  const floatingVariants = {
-    animate: {
-      y: [0, -20, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
   };
 
   const fadeInUp = {
@@ -81,7 +70,6 @@ const AlchemyLandingPage = () => {
 
   return (
     <>
-      {/* Google Fonts */}
       <link
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Poppins:wght@300;400;600;700;800&display=swap"
         rel="stylesheet"
@@ -100,17 +88,11 @@ const AlchemyLandingPage = () => {
       >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
             <button
               onClick={() => scrollToSection("hero")}
               className="flex items-center gap-3 group cursor-pointer"
             >
               <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                {/* <Sparkles
-                  className="w-6 h-6 text-purple-900"
-                  strokeWidth={2.5}
-                /> */}
-
                 <img
                   src="alchfavicon.png"
                   alt="logo"
@@ -125,25 +107,24 @@ const AlchemyLandingPage = () => {
               </span>
             </button>
 
-            {/* Navigation Links */}
             <div className="hidden md:flex items-center gap-8">
               <button
                 onClick={() => scrollToSection("about")}
                 className="text-purple-200 hover:text-yellow-400 transition-colors font-medium"
               >
-                About
+                How It Works
               </button>
               <button
                 onClick={() => scrollToSection("tokenomics")}
                 className="text-purple-200 hover:text-yellow-400 transition-colors font-medium"
               >
-                Tokenomics
+                Tokens
               </button>
               <button
-                onClick={() => scrollToSection("roadmap")}
+                onClick={() => scrollToSection("features")}
                 className="text-purple-200 hover:text-yellow-400 transition-colors font-medium"
               >
-                Roadmap
+                Features
               </button>
               <button
                 onClick={() => scrollToSection("community")}
@@ -152,7 +133,6 @@ const AlchemyLandingPage = () => {
                 Community
               </button>
 
-              {/* CTA Button */}
               <a
                 href="https://x.com/i/communities/1978345630406693026"
                 target="_blank"
@@ -169,7 +149,6 @@ const AlchemyLandingPage = () => {
               </a>
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 text-purple-200 hover:text-yellow-400 transition-colors"
@@ -206,7 +185,6 @@ const AlchemyLandingPage = () => {
             </button>
           </div>
 
-          {/* Mobile Menu */}
           {mobileMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
@@ -219,19 +197,19 @@ const AlchemyLandingPage = () => {
                   onClick={() => scrollToSection("about")}
                   className="block w-full text-left text-purple-200 hover:text-yellow-400 transition-colors font-medium py-2"
                 >
-                  About
+                  How It Works
                 </button>
                 <button
                   onClick={() => scrollToSection("tokenomics")}
                   className="block w-full text-left text-purple-200 hover:text-yellow-400 transition-colors font-medium py-2"
                 >
-                  Tokenomics
+                  Tokens
                 </button>
                 <button
-                  onClick={() => scrollToSection("roadmap")}
+                  onClick={() => scrollToSection("features")}
                   className="block w-full text-left text-purple-200 hover:text-yellow-400 transition-colors font-medium py-2"
                 >
-                  Roadmap
+                  Features
                 </button>
                 <button
                   onClick={() => scrollToSection("community")}
@@ -265,11 +243,9 @@ const AlchemyLandingPage = () => {
           id="hero"
           className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
         >
-          {/* Luxurious gradient background */}
           <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-purple-900 to-indigo-950"></div>
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-900/20 via-transparent to-transparent"></div>
 
-          {/* Animated background particles */}
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
               <motion.div
@@ -298,7 +274,6 @@ const AlchemyLandingPage = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
             >
-              {/* Banner - Styled to match alchemy_banner.png */}
               <motion.div
                 className="mb-12 w-full max-w-5xl mx-auto"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -310,7 +285,7 @@ const AlchemyLandingPage = () => {
                   <div className="relative rounded-3xl overflow-hidden border-4 border-yellow-400/30 shadow-2xl bg-gradient-to-r from-purple-600 via-purple-700 to-purple-600">
                     <img
                       src="alchemy_banner.png"
-                      alt="hero banner"
+                      alt="Alchemy Banner"
                       className="w-full"
                     />
                   </div>
@@ -324,7 +299,7 @@ const AlchemyLandingPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
-                The Alchemy of Memes & Magic — $ALCH
+                Hold $ALCH, Earn $GOLD
               </motion.p>
 
               <motion.p
@@ -333,8 +308,8 @@ const AlchemyLandingPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.8 }}
               >
-                Turning meme culture into digital gold through community-driven
-                alchemy
+                Fully automated reward distribution on Solana. Simply hold $ALCH
+                and earn proportional $GOLD rewards
               </motion.p>
 
               <motion.div
@@ -344,14 +319,15 @@ const AlchemyLandingPage = () => {
                 transition={{ delay: 0.9, duration: 0.8 }}
               >
                 <a
-                  href="https://x.com/i/communities/1978345630406693026"
+                  href="https://jup.ag/swap/SOL-WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative"
                 >
                   <button className="relative px-10 py-5 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-purple-950 rounded-xl font-bold text-lg shadow-2xl shadow-yellow-900/40 border border-yellow-300/50 hover:shadow-yellow-800/60 transition-all duration-300">
                     <span className="flex items-center gap-2">
-                      Join the X Community
+                      Buy $ALCH
+                      <Coins className="w-5 h-5" strokeWidth={2.5} />
                     </span>
                   </button>
                 </a>
@@ -373,7 +349,6 @@ const AlchemyLandingPage = () => {
             </motion.div>
           </div>
 
-          {/* Scroll indicator */}
           <motion.div
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
             animate={{ y: [0, 10, 0] }}
@@ -385,8 +360,8 @@ const AlchemyLandingPage = () => {
           </motion.div>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="py-24 px-6 relative">
+        {/* How It Works Section */}
+        <section id="about" className="py-32 px-6 relative">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial="hidden"
@@ -395,108 +370,102 @@ const AlchemyLandingPage = () => {
               variants={staggerContainer}
             >
               <motion.h2
-                className="text-5xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-purple-200 to-yellow-300 bg-clip-text text-transparent"
+                className="text-5xl md:text-7xl font-bold text-center mb-20 bg-gradient-to-r from-purple-200 to-yellow-300 bg-clip-text text-transparent"
                 style={{ fontFamily: "'Caveat', cursive" }}
                 variants={fadeInUp}
               >
-                What is Alchemy?
+                How It Works
               </motion.h2>
 
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <motion.div variants={fadeInUp}>
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-purple-500/20 rounded-3xl blur-xl"></div>
-                    <div className="relative bg-purple-800/30 backdrop-blur-sm rounded-3xl p-8 border border-purple-500/30">
-                      <div className="flex justify-center mb-6">
-                        <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
-                          <Zap
-                            className="w-10 h-10 text-purple-900"
-                            strokeWidth={2.5}
-                          />
-                        </div>
-                      </div>
-                      <p className="text-lg text-purple-200 leading-relaxed">
-                        Alchemy is where ancient mysticism meets modern meme
-                        culture. Built on Solana, $ALCH represents the
-                        transformation of creative energy into digital value.
-                      </p>
+              <div className="grid md:grid-cols-3 gap-8 mb-16">
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-800/40 to-purple-900/40 backdrop-blur-sm rounded-3xl p-8 border border-purple-500/30 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <div className="flex justify-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full flex items-center justify-center border border-yellow-400/30">
+                      <Coins
+                        className="w-8 h-8 text-yellow-400"
+                        strokeWidth={2}
+                      />
                     </div>
                   </div>
+                  <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center">
+                    1. Collect Fees
+                  </h3>
+                  <p className="text-purple-200 text-center leading-relaxed">
+                    Trading fees are automatically collected from the ALCH/SOL
+                    liquidity pool every few minutes
+                  </p>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="space-y-6">
-                  <div className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300 hover:scale-105">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Users
-                        className="w-7 h-7 text-yellow-400"
-                        strokeWidth={2.5}
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-800/40 to-purple-900/40 backdrop-blur-sm rounded-3xl p-8 border border-purple-500/30 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <div className="flex justify-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full flex items-center justify-center border border-yellow-400/30">
+                      <RefreshCw
+                        className="w-8 h-8 text-yellow-400"
+                        strokeWidth={2}
                       />
-                      <h3 className="text-2xl font-bold text-yellow-400">
-                        Community-Driven
-                      </h3>
                     </div>
-                    <p className="text-purple-200">
-                      Every holder is an alchemist, contributing to the
-                      collective magic of the project
-                    </p>
                   </div>
+                  <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center">
+                    2. Convert to $GOLD
+                  </h3>
+                  <p className="text-purple-200 text-center leading-relaxed">
+                    SOL is swapped to $GOLD using Jupiter aggregator for the
+                    best exchange rates
+                  </p>
+                </motion.div>
 
-                  <div className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300 hover:scale-105">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Sparkles
-                        className="w-7 h-7 text-yellow-400"
-                        strokeWidth={2.5}
-                      />
-                      <h3 className="text-2xl font-bold text-yellow-400">
-                        Meme Magic
-                      </h3>
-                    </div>
-                    <p className="text-purple-200">
-                      Harnessing the power of internet culture to create
-                      something truly unique
-                    </p>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300 hover:scale-105">
-                    <div className="flex items-center gap-3 mb-3">
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-800/40 to-purple-900/40 backdrop-blur-sm rounded-3xl p-8 border border-purple-500/30 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <div className="flex justify-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full flex items-center justify-center border border-yellow-400/30">
                       <TrendingUp
-                        className="w-7 h-7 text-yellow-400"
-                        strokeWidth={2.5}
+                        className="w-8 h-8 text-yellow-400"
+                        strokeWidth={2}
                       />
-                      <h3 className="text-2xl font-bold text-yellow-400">
-                        Digital Gold
-                      </h3>
                     </div>
-                    <p className="text-purple-200">
-                      Transforming creative participation into tangible value
-                      for the community
-                    </p>
                   </div>
+                  <h3 className="text-2xl font-bold mb-4 text-yellow-400 text-center">
+                    3. Distribute Rewards
+                  </h3>
+                  <p className="text-purple-200 text-center leading-relaxed">
+                    $GOLD is distributed proportionally to all $ALCH holders
+                    based on their percentage of supply
+                  </p>
                 </motion.div>
               </div>
+
+              <motion.div
+                variants={fadeInUp}
+                className="bg-gradient-to-r from-yellow-900/20 to-purple-900/20 backdrop-blur-sm rounded-2xl p-8 border border-yellow-400/30"
+              >
+                <p className="text-xl text-purple-200 text-center leading-relaxed">
+                  <span className="text-yellow-400 font-bold">Example:</span> If
+                  you hold 5% of the total $ALCH supply, you automatically
+                  receive 5% of every $GOLD distribution. All rewards are sent
+                  directly to your wallet — no staking or claiming required!
+                </p>
+              </motion.div>
             </motion.div>
           </div>
         </section>
 
-        {/* Tokenomics Section */}
+        {/* Tokens Section */}
         <section
           id="tokenomics"
           className="py-32 px-6 bg-gradient-to-b from-purple-950 via-indigo-950 to-purple-900 relative overflow-hidden"
         >
-          {/* Background decoration */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-400 rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
           </div>
-          {/* Subtle pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 2px 2px, rgba(255, 215, 0, 0.15) 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
-          ></div>
 
           <div className="max-w-6xl mx-auto relative z-10">
             <motion.div
@@ -510,46 +479,54 @@ const AlchemyLandingPage = () => {
                 style={{ fontFamily: "'Caveat', cursive" }}
                 variants={fadeInUp}
               >
-                Tokenomics
+                Two Tokens, One Ecosystem
               </motion.h2>
 
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-2 gap-8">
                 <motion.div variants={fadeInUp} className="group">
                   <div className="relative h-full">
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-3xl blur-xl"></div>
-                    <div className="relative bg-gradient-to-br from-purple-800/50 to-purple-900/50 backdrop-blur-xl rounded-3xl p-10 border-2 border-yellow-400/30 h-full flex flex-col items-center justify-center text-center hover:border-yellow-300/50 transition-all duration-500 shadow-2xl">
-                      <div className="mb-6 w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full flex items-center justify-center border border-yellow-400/30">
-                        <TrendingUp
-                          className="w-10 h-10 text-yellow-300"
-                          strokeWidth={2}
-                        />
+                    <div className="relative bg-gradient-to-br from-purple-800/50 to-purple-900/50 backdrop-blur-xl rounded-3xl p-10 border-2 border-yellow-400/30 h-full hover:border-yellow-300/50 transition-all duration-500 shadow-2xl">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full flex items-center justify-center border border-yellow-400/30">
+                          <Sparkles
+                            className="w-10 h-10 text-yellow-300"
+                            strokeWidth={2}
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-3xl font-bold text-yellow-300">
+                            $ALCH
+                          </h3>
+                          <p className="text-purple-300 text-sm">
+                            Snapshot Token
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="text-2xl font-bold mb-4 text-yellow-300">
-                        Total Supply
-                      </h3>
-                      <p className="text-5xl font-bold text-white mb-3">1B</p>
-                      <p className="text-purple-300/80">$ALCH tokens</p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="group">
-                  <div className="relative h-full">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-purple-600/20 rounded-3xl blur-xl"></div>
-                    <div className="relative bg-gradient-to-br from-purple-800/50 to-purple-900/50 backdrop-blur-xl rounded-3xl p-10 border-2 border-purple-400/30 h-full flex flex-col items-center justify-center text-center hover:border-purple-300/50 transition-all duration-500 shadow-2xl">
-                      <div className="mb-6 w-20 h-20 bg-gradient-to-br from-purple-400/20 to-purple-600/20 rounded-full flex items-center justify-center border border-purple-400/30">
-                        <Flame
-                          className="w-10 h-10 text-purple-300"
-                          strokeWidth={2}
-                        />
-                      </div>
-                      <h3 className="text-2xl font-bold mb-4 text-purple-300">
-                        Liquidity
-                      </h3>
-                      <p className="text-5xl font-bold text-white mb-3">
-                        Burned
+                      <p className="text-purple-200 mb-6 leading-relaxed">
+                        The main token that you hold to qualify for $GOLD
+                        rewards. Built on Token-2022 standard on Solana.
                       </p>
-                      <p className="text-purple-300/80">LP tokens destroyed</p>
+                      <div className="bg-purple-900/40 rounded-xl p-4 mb-4">
+                        <p className="text-sm text-purple-300 mb-2">
+                          Contract Address
+                        </p>
+                        <code className="text-xs text-yellow-300 break-all font-mono">
+                          WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU
+                        </code>
+                      </div>
+                      <div className="flex gap-2">
+                        <a
+                          href="https://jup.ag/swap/SOL-WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1"
+                        >
+                          <button className="w-full px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-purple-950 rounded-lg font-bold hover:from-yellow-300 hover:to-yellow-400 transition-all">
+                            Buy on Jupiter
+                          </button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -557,63 +534,57 @@ const AlchemyLandingPage = () => {
                 <motion.div variants={fadeInUp} className="group">
                   <div className="relative h-full">
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-3xl blur-xl"></div>
-                    <div className="relative bg-gradient-to-br from-purple-800/50 to-purple-900/50 backdrop-blur-xl rounded-3xl p-10 border-2 border-yellow-400/30 h-full flex flex-col items-center justify-center text-center hover:border-yellow-300/50 transition-all duration-500 shadow-2xl">
-                      <div className="mb-6 w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full flex items-center justify-center border border-yellow-400/30">
-                        <Target
-                          className="w-10 h-10 text-yellow-300"
-                          strokeWidth={2}
-                        />
+                    <div className="relative bg-gradient-to-br from-purple-800/50 to-purple-900/50 backdrop-blur-xl rounded-3xl p-10 border-2 border-yellow-400/30 h-full hover:border-yellow-300/50 transition-all duration-500 shadow-2xl">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-20 h-20 bg-gradient-to-br from-yellow-400/20 to-orange-500/20 rounded-full flex items-center justify-center border border-yellow-400/30">
+                          <Coins
+                            className="w-10 h-10 text-yellow-300"
+                            strokeWidth={2}
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-3xl font-bold text-yellow-300">
+                            $GOLD
+                          </h3>
+                          <p className="text-purple-300 text-sm">
+                            Reward Token
+                          </p>
+                        </div>
                       </div>
-                      <h3 className="text-2xl font-bold mb-4 text-yellow-300">
-                        Tax
-                      </h3>
-                      <p className="text-5xl font-bold text-white mb-3">0%</p>
-                      <p className="text-purple-300/80">Buy & Sell</p>
+                      <p className="text-purple-200 mb-6 leading-relaxed">
+                        The reward token automatically distributed to $ALCH
+                        holders. Earn passively just by holding.
+                      </p>
+                      <div className="bg-purple-900/40 rounded-xl p-4 mb-4">
+                        <p className="text-sm text-purple-300 mb-2">
+                          Contract Address
+                        </p>
+                        <code className="text-xs text-yellow-300 break-all font-mono">
+                          GoLDppdjB1vDTPSGxyMJFqdnj134yH6Prg9eqsGDiw6A
+                        </code>
+                      </div>
+                      <div className="flex gap-2">
+                        <a
+                          href="https://solscan.io/token/GoLDppdjB1vDTPSGxyMJFqdnj134yH6Prg9eqsGDiw6A"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1"
+                        >
+                          <button className="w-full px-6 py-3 bg-purple-700/50 border-2 border-purple-400/50 text-purple-100 rounded-lg font-bold hover:bg-purple-600/50 transition-all">
+                            View on Solscan
+                          </button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
               </div>
-
-              <motion.div variants={fadeInUp} className="mt-16 text-center">
-                <div className="inline-block bg-purple-800/30 backdrop-blur-xl rounded-2xl p-8 border border-purple-400/30 shadow-xl">
-                  <p className="text-sm text-purple-300/80 mb-3 uppercase tracking-wider">
-                    Contract Address
-                  </p>
-                  <div className="flex items-center gap-3 flex-wrap justify-center">
-                    <code className="text-xs md:text-sm text-yellow-300/90 break-all font-mono">
-                      WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU
-                    </code>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() =>
-                          navigator.clipboard.writeText(
-                            "WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU"
-                          )
-                        }
-                        className="p-2 hover:bg-purple-700/50 rounded-lg transition-colors"
-                        title="Copy contract address"
-                      >
-                        <Copy className="w-4 h-4 text-purple-300 hover:text-yellow-400" />
-                      </button>
-                      <a
-                        href="https://solscan.io/token/WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 hover:bg-purple-700/50 rounded-lg transition-colors"
-                        title="View on Solscan"
-                      >
-                        <ExternalLink className="w-4 h-4 text-purple-300 hover:text-yellow-400" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </section>
 
-        {/* Roadmap Section */}
-        <section id="roadmap" className="py-24 px-6 relative">
+        {/* Features Section */}
+        <section id="features" className="py-32 px-6 relative">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial="hidden"
@@ -622,97 +593,109 @@ const AlchemyLandingPage = () => {
               variants={staggerContainer}
             >
               <motion.h2
-                className="text-5xl md:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-purple-200 to-yellow-300 bg-clip-text text-transparent"
+                className="text-5xl md:text-7xl font-bold text-center mb-20 bg-gradient-to-r from-purple-200 to-yellow-300 bg-clip-text text-transparent"
                 style={{ fontFamily: "'Caveat', cursive" }}
                 variants={fadeInUp}
               >
-                The Alchemical Journey
+                Key Features
               </motion.h2>
 
-              <div className="space-y-8">
-                <motion.div variants={fadeInUp} className="relative">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-500/50">
-                        <Sparkles
-                          className="w-8 h-8 text-purple-900"
-                          strokeWidth={2.5}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex-grow bg-purple-800/30 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/30 hover:border-yellow-400/50 transition-all duration-300">
-                      <h3 className="text-2xl font-bold mb-2 text-yellow-400">
-                        Phase 1: The Awakening
-                      </h3>
-                      <p className="text-purple-200">
-                        Launch on Solana, build the community, establish the
-                        magic circle on X
-                      </p>
-                    </div>
-                  </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <Zap
+                    className="w-8 h-8 text-yellow-400 mb-4"
+                    strokeWidth={2}
+                  />
+                  <h3 className="text-xl font-bold text-yellow-400 mb-3">
+                    Fully Automated
+                  </h3>
+                  <p className="text-purple-200 text-sm">
+                    Runs continuously with PM2 process management. No manual
+                    intervention needed.
+                  </p>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="relative ml-8">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/50">
-                        <Zap className="w-8 h-8 text-white" strokeWidth={2.5} />
-                      </div>
-                    </div>
-                    <div className="flex-grow bg-purple-800/30 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/30 hover:border-yellow-400/50 transition-all duration-300">
-                      <h3 className="text-2xl font-bold mb-2 text-purple-300">
-                        Phase 2: The Transformation
-                      </h3>
-                      <p className="text-purple-200">
-                        Strategic partnerships, enhanced liquidity, meme
-                        competitions and community events
-                      </p>
-                    </div>
-                  </div>
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <TrendingUp
+                    className="w-8 h-8 text-yellow-400 mb-4"
+                    strokeWidth={2}
+                  />
+                  <h3 className="text-xl font-bold text-yellow-400 mb-3">
+                    Proportional Rewards
+                  </h3>
+                  <p className="text-purple-200 text-sm">
+                    Distribution based on your ALCH holdings percentage
+                  </p>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="relative ml-16">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/50">
-                        <Flame
-                          className="w-8 h-8 text-purple-900"
-                          strokeWidth={2.5}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex-grow bg-purple-800/30 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/30 hover:border-yellow-400/50 transition-all duration-300">
-                      <h3 className="text-2xl font-bold mb-2 text-yellow-400">
-                        Phase 3: The Transmutation
-                      </h3>
-                      <p className="text-purple-200">
-                        Major exchange listings, global marketing, NFT
-                        collection, DAO governance
-                      </p>
-                    </div>
-                  </div>
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <RefreshCw
+                    className="w-8 h-8 text-yellow-400 mb-4"
+                    strokeWidth={2}
+                  />
+                  <h3 className="text-xl font-bold text-yellow-400 mb-3">
+                    Optimal Swaps
+                  </h3>
+                  <p className="text-purple-200 text-sm">
+                    Jupiter aggregator finds the best SOL→GOLD routes
+                  </p>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="relative ml-24">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center shadow-lg shadow-yellow-400/50 animate-pulse">
-                        <TrendingUp
-                          className="w-8 h-8 text-purple-900"
-                          strokeWidth={2.5}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex-grow bg-gradient-to-br from-yellow-900/30 to-purple-800/30 backdrop-blur-sm rounded-2xl p-6 border border-yellow-400/50 hover:border-yellow-300/70 transition-all duration-300">
-                      <h3 className="text-2xl font-bold mb-2 text-yellow-300">
-                        Phase 4: Digital Gold
-                      </h3>
-                      <p className="text-purple-200">
-                        Full ecosystem launch, utility features, community-led
-                        projects, legendary status achieved
-                      </p>
-                    </div>
-                  </div>
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <Target
+                    className="w-8 h-8 text-yellow-400 mb-4"
+                    strokeWidth={2}
+                  />
+                  <h3 className="text-xl font-bold text-yellow-400 mb-3">
+                    Pool Filtering
+                  </h3>
+                  <p className="text-purple-200 text-sm">
+                    Automatically excludes AMM/DEX addresses from distribution
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <Users
+                    className="w-8 h-8 text-yellow-400 mb-4"
+                    strokeWidth={2}
+                  />
+                  <h3 className="text-xl font-bold text-yellow-400 mb-3">
+                    Batch Processing
+                  </h3>
+                  <p className="text-purple-200 text-sm">
+                    Efficient parallel transaction execution for all holders
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-purple-700/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-yellow-400/50 transition-all duration-300"
+                >
+                  <Flame
+                    className="w-8 h-8 text-yellow-400 mb-4"
+                    strokeWidth={2}
+                  />
+                  <h3 className="text-xl font-bold text-yellow-400 mb-3">
+                    Secure
+                  </h3>
+                  <p className="text-purple-200 text-sm">
+                    No private keys in code, environment-based configuration
+                  </p>
                 </motion.div>
               </div>
             </motion.div>
@@ -724,28 +707,8 @@ const AlchemyLandingPage = () => {
           id="community"
           className="py-32 px-6 bg-gradient-to-b from-purple-900 via-purple-950 to-purple-900 relative overflow-hidden"
         >
-          {/* Luxurious background elements */}
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-900/10 via-transparent to-transparent"></div>
-            {[...Array(15)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-yellow-400 rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.3, 0.8, 0.3],
-                }}
-                transition={{
-                  duration: 2 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
           </div>
 
           <div className="max-w-4xl mx-auto relative z-10">
@@ -756,226 +719,62 @@ const AlchemyLandingPage = () => {
               variants={staggerContainer}
               className="text-center"
             >
-              <motion.div variants={fadeInUp} className="mb-12">
-                <div className="flex justify-center items-center gap-6 mb-8">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-yellow-400/20 blur-xl"></div>
-                    <div className="relative w-16 h-16 border-2 border-yellow-400/40 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <Users
-                        className="w-8 h-8 text-yellow-400"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-yellow-300/20 blur-2xl"></div>
-                    <div className="relative w-20 h-20 border-2 border-yellow-300/50 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <Sparkles
-                        className="w-10 h-10 text-yellow-300"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-yellow-400/20 blur-xl"></div>
-                    <div className="relative w-16 h-16 border-2 border-yellow-400/40 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <Users
-                        className="w-8 h-8 text-yellow-400"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
               <motion.h2
                 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent"
                 style={{ fontFamily: "'Caveat', cursive" }}
                 variants={fadeInUp}
               >
-                The Magic Circle
+                Join the Alchemy Community
               </motion.h2>
 
               <motion.p
                 className="text-xl md:text-2xl text-purple-200/90 mb-16 max-w-2xl mx-auto leading-relaxed"
                 variants={fadeInUp}
               >
-                Join a vibrant community of alchemists, meme creators, and
-                crypto enthusiasts transforming the ordinary into the
-                extraordinary
+                Hold $ALCH • Earn $GOLD • Prosper Together
               </motion.p>
 
               <motion.div
                 variants={fadeInUp}
-                className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+                className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
               >
-                <div className="bg-purple-800/30 backdrop-blur-md rounded-2xl p-8 border border-purple-400/20 shadow-xl shadow-purple-900/20">
-                  <div className="text-4xl font-bold text-yellow-400 mb-3 bg-gradient-to-br from-yellow-300 to-yellow-500 bg-clip-text text-transparent">
-                    10K+
-                  </div>
-                  <div className="text-sm text-purple-300/80">
-                    Community Members
-                  </div>
-                </div>
-                <div className="bg-purple-800/30 backdrop-blur-md rounded-2xl p-8 border border-purple-400/20 shadow-xl shadow-purple-900/20">
-                  <div className="text-4xl font-bold text-yellow-400 mb-3 bg-gradient-to-br from-yellow-300 to-yellow-500 bg-clip-text text-transparent">
-                    500+
-                  </div>
-                  <div className="text-sm text-purple-300/80">Daily Memes</div>
-                </div>
-                <div className="bg-purple-800/30 backdrop-blur-md rounded-2xl p-8 border border-purple-400/20 shadow-xl shadow-purple-900/20">
-                  <div className="text-4xl font-bold text-yellow-400 mb-3 bg-gradient-to-br from-yellow-300 to-yellow-500 bg-clip-text text-transparent">
-                    24/7
-                  </div>
-                  <div className="text-sm text-purple-300/80">Active Chat</div>
-                </div>
-                <div className="bg-purple-800/30 backdrop-blur-md rounded-2xl p-8 border border-purple-400/20 shadow-xl shadow-purple-900/20">
-                  <div className="text-4xl font-bold text-yellow-400 mb-3 bg-gradient-to-br from-yellow-300 to-yellow-500 bg-clip-text text-transparent">
-                    100%
-                  </div>
-                  <div className="text-sm text-purple-300/80">Pure Magic</div>
-                </div>
-              </motion.div>
-
-              <motion.a
-                href="https://x.com/i/communities/1978345630406693026"
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={fadeInUp}
-                className="group inline-block"
-              >
-                <div className="relative px-12 py-6 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-xl font-bold text-xl transition-all duration-300 shadow-2xl shadow-yellow-900/30 border border-yellow-300/50 hover:shadow-yellow-800/50">
-                  <span className="relative z-10 text-purple-950 flex items-center justify-center gap-2">
-                    Join the Conversation
-                    <ArrowRight
-                      className="w-6 h-6 group-hover:translate-x-1 transition-transform"
-                      strokeWidth={2.5}
-                    />
-                  </span>
-                </div>
-              </motion.a>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Final CTA Section */}
-        <section id="cta" className="py-32 px-6 relative overflow-hidden">
-          {/* Luxurious background */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-purple-900 to-indigo-950"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-900/10 via-transparent to-transparent"></div>
-            {/* Subtle grid pattern */}
-            <div
-              className="absolute inset-0 opacity-5"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 215, 0, 0.1) 1px, transparent 1px)",
-                backgroundSize: "50px 50px",
-              }}
-            ></div>
-          </div>
-
-          <div className="max-w-4xl mx-auto relative z-10">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={staggerContainer}
-              className="text-center"
-            >
-              <motion.div variants={fadeInUp} className="mb-12">
-                <div className="flex justify-center items-center gap-6 mb-8">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 blur-2xl"></div>
-                    <div className="relative w-16 h-16 border-2 border-yellow-400/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <Zap
-                        className="w-8 h-8 text-yellow-400"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-300/20 to-yellow-500/20 blur-3xl"></div>
-                    <div className="relative w-24 h-24 border-2 border-yellow-300/40 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <Sparkles
-                        className="w-12 h-12 text-yellow-300"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 blur-2xl"></div>
-                    <div className="relative w-16 h-16 border-2 border-yellow-400/30 rounded-full flex items-center justify-center backdrop-blur-sm">
-                      <Zap
-                        className="w-8 h-8 text-yellow-400"
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.h2
-                className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent leading-tight"
-                style={{ fontFamily: "'Caveat', cursive" }}
-                variants={fadeInUp}
-              >
-                Become Part of the Alchemy
-              </motion.h2>
-
-              <motion.p
-                className="text-xl md:text-2xl text-purple-200/90 mb-16 max-w-2xl mx-auto leading-relaxed"
-                variants={fadeInUp}
-              >
-                Own, trade, and create the magic behind $ALCH. The
-                transformation begins now.
-              </motion.p>
-
-              <motion.div
-                className="flex flex-col sm:flex-row gap-6 justify-center"
-                variants={fadeInUp}
-              >
-                <a href="#" className="group relative">
-                  <div className="relative px-12 py-6 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-xl font-bold text-xl transition-all duration-300 shadow-2xl shadow-yellow-900/30 border border-yellow-300/50">
-                    <span className="relative z-10 text-purple-950 flex items-center justify-center gap-2">
-                      Buy $ALCH
-                      <ArrowRight
-                        className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                        strokeWidth={2.5}
-                      />
-                    </span>
-                  </div>
-                </a>
-
                 <a
                   href="https://x.com/i/communities/1978345630406693026"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group"
                 >
-                  <div className="px-12 py-6 bg-purple-800/30 backdrop-blur-md border-2 border-purple-400/40 rounded-xl font-bold text-xl transition-all duration-300 shadow-xl shadow-purple-900/20 hover:bg-purple-700/40 hover:border-purple-300/60">
-                    <span className="text-purple-100 flex items-center justify-center gap-2">
+                  <div className="px-12 py-6 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-xl font-bold text-xl transition-all duration-300 shadow-2xl shadow-yellow-900/30 border border-yellow-300/50">
+                    <span className="text-purple-950 flex items-center justify-center gap-2">
+                      {/* <Twitter className="w-6 h-6" strokeWidth={2.5} /> */}
                       Join Community
-                      <Users
-                        className="w-5 h-5 group-hover:scale-110 transition-transform"
-                        strokeWidth={2.5}
-                      />
+                    </span>
+                  </div>
+                </a>
+
+                <a
+                  href="https://github.com/MidTermDev/Alchemy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  <div className="px-12 py-6 bg-purple-800/30 backdrop-blur-md border-2 border-purple-400/40 rounded-xl font-bold text-xl transition-all duration-300 shadow-xl shadow-purple-900/20 hover:bg-purple-700/40">
+                    <span className="text-purple-100 flex items-center justify-center gap-2">
+                      <Github className="w-6 h-6" strokeWidth={2.5} />
+                      View on GitHub
                     </span>
                   </div>
                 </a>
               </motion.div>
 
-              {/* Decorative line */}
-              <motion.div
-                variants={fadeInUp}
-                className="mt-16 flex items-center justify-center gap-4"
-              >
-                <div className="h-px w-24 bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent"></div>
-                <Sparkles
-                  className="w-5 h-5 text-yellow-400/60"
-                  strokeWidth={1.5}
-                />
-                <div className="h-px w-24 bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent"></div>
+              <motion.div variants={fadeInUp}>
+                <div className="bg-gradient-to-br from-purple-800/40 to-purple-900/40 backdrop-blur-sm rounded-2xl p-8 border border-yellow-400/30">
+                  <p className="text-lg text-purple-200 leading-relaxed">
+                    Built with{" "}
+                    <Heart className="w-5 h-5 inline text-purple-400 fill-purple-400" />{" "}
+                    for the Alchemy community
+                  </p>
+                </div>
               </motion.div>
             </motion.div>
           </div>
@@ -997,11 +796,11 @@ const AlchemyLandingPage = () => {
                     className="text-2xl font-bold text-yellow-400"
                     style={{ fontFamily: "'Caveat', cursive" }}
                   >
-                    ALCH
+                    Alchemy
                   </span>
                 </div>
                 <p className="text-sm text-purple-300">
-                  Transforming memes into magic
+                  Hold $ALCH, Earn $GOLD
                 </p>
               </div>
 
@@ -1018,7 +817,7 @@ const AlchemyLandingPage = () => {
                     <span>X Community</span>
                   </a>
                   <a
-                    href="https://github.com/MidTermDev/Alchemy#"
+                    href="https://github.com/MidTermDev/Alchemy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 text-purple-300 hover:text-yellow-400 transition-colors"
@@ -1030,42 +829,30 @@ const AlchemyLandingPage = () => {
               </div>
 
               <div className="text-center md:text-right">
-                <h4 className="font-bold text-yellow-400 mb-3">Contract</h4>
-                <div className="flex items-center justify-center md:justify-end gap-2">
-                  <code className="text-xs text-purple-300 break-all">
-                    WXsX...cXAU
-                  </code>
-                  <button
-                    onClick={() =>
-                      navigator.clipboard.writeText(
-                        "WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU"
-                      )
-                    }
-                    className="p-1 hover:bg-purple-800 rounded transition-colors"
-                    title="Copy contract address"
-                  >
-                    <Copy className="w-4 h-4 text-purple-300 hover:text-yellow-400" />
-                  </button>
+                <h4 className="font-bold text-yellow-400 mb-3">Resources</h4>
+                <div className="space-y-2">
                   <a
                     href="https://solscan.io/token/WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1 hover:bg-purple-800 rounded transition-colors"
-                    title="View on Solscan"
+                    className="block text-purple-300 hover:text-yellow-400 transition-colors text-sm"
                   >
-                    <ExternalLink className="w-4 h-4 text-purple-300 hover:text-yellow-400" />
+                    $ALCH on Solscan
+                  </a>
+                  <a
+                    href="https://jup.ag/swap/SOL-WXsX5HSoVquYRGuJXJrCSogT1M6nZiPRrfZhQsPcXAU"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-purple-300 hover:text-yellow-400 transition-colors text-sm"
+                  >
+                    Trade on Jupiter
                   </a>
                 </div>
               </div>
             </div>
 
             <div className="text-center pt-8 border-t border-purple-800">
-              <p className="text-purple-400 text-sm flex items-center justify-center gap-2">
-                Made with{" "}
-                <Heart className="w-4 h-4 text-purple-400 fill-purple-400" /> by
-                the Alchemy community
-              </p>
-              <p className="text-purple-500 text-xs mt-2">
+              <p className="text-purple-500 text-xs">
                 © 2025 Alchemy. All rights reserved.
               </p>
             </div>
